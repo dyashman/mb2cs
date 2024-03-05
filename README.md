@@ -12,6 +12,18 @@ There are two csv files included for lookups you can add to if you find addition
 - names.csv contains set code + collector number lookups to override card name + edition
 - editions.csv contains set code + collector number ranges to override editions (mostly for Booster Fun)
 
+As an example, with my collection of 25,319 cards, a direct import into Cardsphere gives:
+```
+From 13282 entries 11816 unique cards were added (21635 total). 1000 or more entries could not be matched
+```
+
+After running it through mb2cs:
+```
+From 12840 entries 12788 unique cards were added (23894 total). 52 entries could not be matched.
+```
+
+Not perfect yet, but that also doesn't count all the cards that imported successfully as the wrong card.
+
 # Requirements
 
 Manabox csv exported from the Manabox App - https://www.manabox.app/
