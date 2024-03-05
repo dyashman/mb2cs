@@ -50,3 +50,11 @@ Hit 100 Multiverse Bridge lookups, sleeping 60s to avoid throttling.
 ...resuming
 Done
 ```
+
+# Known Issues / Limitations
+There's still a lot to do - the main areas that have issues are:
+- Various Promos
+- Unfinity Attractions
+- Tokens
+- Old cards with alt art (Homelands/Fallen Empires/etc)
+- Some lands and mdfc/split cards that are inconsistent on Cardsphere
