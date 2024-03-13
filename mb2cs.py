@@ -125,6 +125,8 @@ with open(infile, "r", encoding="utf-8") as file:
             edition = edition.replace("Theros Beyond Death","Theros: Beyond Death")
         if "The Lord of the Rings" in edition:
             edition = edition.replace("The Lord of the Rings","Lord of the Rings")
+        if "Core Set" in edition:
+            edition = edition.replace("Core Set","Core")
 
         # Multiverse Bridge lookup for List cards and some cards with a/b/c/etc versions in Manabox
         if "-" in collectornumber or setcode == "PLST" or edition == "The List" or collectornumber[len(collectornumber)-1] in "abcdef":
