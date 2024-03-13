@@ -189,7 +189,8 @@ with open(infile, "r", encoding="utf-8") as file:
                 err.write("Unknown promo with set code: '"+collectornumber+"' for "+name+"\n")
                 continue
         elif setcode[0] == "P":
-            edition = edition.replace(" Promos","")
+            if not "Resale" in edition:
+                edition = edition.replace(" Promos","")
             collectornumber = re.sub("[^0-9]","",collectornumber)
 
         # Process list of cards with different names, mostly lands
