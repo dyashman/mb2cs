@@ -207,7 +207,8 @@ with open(infile, "r", encoding="utf-8") as file:
                 (name in {"Arcane Signet","Mind Stone","Command Tower","Commander's Sphere","Sol Ring","Talisman of Dominance","Wayfarer's Bauble"} and setcode == "40K") or \
                 ("Guildgate" in name and setcode == "GRN") or \
                 ("Snow-Covered" in name and setcode == "KHM") or \
-                (name == "Sol Ring" and setcode == "LTC"):
+                (name == "Sol Ring" and setcode == "LTC") or \
+                (name == "Nazgul" and setcode == "LTR"):
             name += " (#"+collectornumber+")"
 
         # Check for MDFCs/Split/Adventure/etc
