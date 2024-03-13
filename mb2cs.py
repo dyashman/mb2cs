@@ -119,7 +119,10 @@ with open(infile, "r", encoding="utf-8") as file:
             edition = "FNM Promos"
         if "Wizards Play Network" in edition:
             # TODO: Some of these are "WPN and Gateway Promos", others are "Miscellaneous Promos", possibly more?
-            edition = "Miscellaneous Promos"
+            if "2023" in edition:
+                edition = "WPN and Gateway Promos"
+            else:
+                edition = "Miscellaneous Promos"
         # Sets with very minor variations
         if "Theros Beyond Death" in edition:
             edition = edition.replace("Theros Beyond Death","Theros: Beyond Death")
@@ -191,7 +194,7 @@ with open(infile, "r", encoding="utf-8") as file:
                 err.write("Unknown promo with set code: '"+collectornumber+"' for "+name+"\n")
                 continue
         elif setcode[0] == "P":
-            if not "Resale" in edition:
+            if not "Resale" in edition and not "WPN" in edition and not "FNM" in edition and not "Miscellaneous" in edition:
                 edition = edition.replace(" Promos","")
             collectornumber = re.sub("[^0-9]","",collectornumber)
 
