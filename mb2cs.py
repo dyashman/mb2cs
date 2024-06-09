@@ -69,7 +69,8 @@ with open('editions.csv', "r") as file:
 
 with open(infile, "r", encoding="utf-8") as file:
     data = csv.reader(file)
-    next(data, None)
+    headers = next(data, None)
+
     row = 0
     mvbcount = 0;
     for mb in data:
@@ -78,18 +79,18 @@ with open(infile, "r", encoding="utf-8") as file:
         # ManaBox CSV export format:
         # Name,Set code,Set name,Collector number,Foil,Rarity,Quantity,ManaBox ID,Scryfall ID,Purchase price,Misprint,Altered,Condition,Language,Purchase price currency
         # TODO: check other app/site exports and see if it's easy to read the header to determine format and create a mapping for each
-        name = mb[0]
-        setcode = mb[1]
-        edition = mb[2]
-        collectornumber = mb[3]
-        foil = "normal" if mb[4] == "normal" else "foil"
-        count = mb[6]
-        scryfallid = mb[8]
-        condition = mb[12]
-        language = languages[mb[13]]
+        name = mb[headers.index("Name")]
+        setcode = mb[headers.index("Set code")]
+        edition = mb[headers.index("Set name")]
+        collectornumber = mb[headers.index("Collector number")]
+        foil = "normal" if mb[headers.index("Foil")] == "normal" else "foil"
+        count = mb[headers.index("Quantity")]
+        scryfallid = mb[headers.index("Scryfall ID")]
+        condition = mb[headers.index("Condition")]
+        language = mb[headers.index("Language")]
 
         # Convert unicode letters to ascii
-        name = unicodedata.normalize('NFKD', mb[0]).encode('ascii','ignore').decode('ascii')
+        name = unicodedata.normalize('NFKD', name).encode('ascii','ignore').decode('ascii')
 
         # Sets with different names on Manabox vs Cardsphere
         set_replace = {
