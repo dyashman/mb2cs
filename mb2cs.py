@@ -223,7 +223,9 @@ with open(infile, "r", encoding="utf-8") as file:
         #   only use the front/primary name on adventures/mdfcs. Until then, only newer cards
         #   strip off the second name. This will also likely be an issue if sets do both MDFCs
         #   alongside split cards.
-        if "//" in name and setcode in {"DKA","SOI","XLN","BOT","NEO","AFC","VOW","MID","DBL","CLB","MOM","MOC","CMM","WOE","WOC","WHO","LCI","LCC"}:
+        if "//" in name and setcode in {"DKA","SOI","XLN","BOT","NEO","AFC","VOW","MID","DBL","CLB", \
+                                        "MOM","MOC","CMM","WOE","WOC","WHO","LCI","LCC","MKM","MKC", \
+                                        "CLU","OTC","MH3","M3C"}:
             name = name.split("//")[0].strip()
         # Strip double quotes
         name = name.replace("\"","")
