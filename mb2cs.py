@@ -207,7 +207,7 @@ with open(infile, "r", encoding="utf-8") as file:
             if setcode not in {"BBD","IXL","RIX","RNA","GRN","UNF","REX","UNH","UNG"}:
                 if int(collectornumber) < 100 and setcode not in {"UND","JMP"}:
                     collectornumber = "0"+collectornumber
-                if not (collectornumber == "262" and name == "Plains"):
+                if not (collectornumber == "262" and name == "Plains" and setcode not in {"ONE","LTR","WOE"}):
                     name += " (#"+collectornumber+")"
         # Other sets with collector numbers in names
         if (name in {"Command Tower","Sonic Screwdriver"} and setcode == "WHO") or \
