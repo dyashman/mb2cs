@@ -154,7 +154,7 @@ with open(infile, "r", encoding="utf-8") as file:
                 print("...resuming")
 
         # Lookups for special cards like promos and old foils that either use "P[SET]" or a letter after the collector number
-        if not collectornumber.isnumeric():
+        if (not collectornumber.isnumeric()) or (setcode[0] == "P" and len(setcode) > 3):
             lastchar = collectornumber[len(collectornumber)-1]
             if setcode[0] == "P" or lastchar == "★":
                 if lastchar == "p": # Most LGS promo packs use this naming for the planeswalker stamped cards
@@ -165,17 +165,21 @@ with open(infile, "r", encoding="utf-8") as file:
                     collectornumber = collectornumber[0:len(collectornumber)-1]
                     edition = edition.replace(" Promos","")
                     edition += " - Prerelease Promos"
-                elif lastchar == "★": # Some old foils use a star after their number
-                    collectornumber = collectornumber[0:len(collectornumber)-1]
                 elif lastchar == "F": # 30th Anniversary 'F'estival cards
                     collectornumber = collectornumber[0:len(collectornumber)-1]
                     edition = "30th Anniversary"
                 elif collectornumber[0] == "A" and not "-" in collectornumber: # Think these are all resale promos
                     collectornumber = collectornumber[1:]
+                elif not "Resale" in edition and not "WPN" in edition and not "FNM" in edition and not "Miscellaneous" in edition:
+                    edition = "Launch Promos"
                 else:
                     err.write("Unknown promo with set code: '"+collectornumber+"' for "+name+"\n")
                     continue
-                setcode = setcode[1:]
+
+                if setcode[0] == "P" and len(setcode) > 3:
+                    setcode = setcode[1:]
+                if not collectornumber.isnumeric():
+                    collectornumber = re.sub("[^0-9]","",collectornumber)
             elif lastchar in "abcdef":
                 if setcode == "BFZ":
                     collectornumber = collectornumber[0:len(collectornumber)-1]
@@ -194,10 +198,7 @@ with open(infile, "r", encoding="utf-8") as file:
             else:
                 err.write("Unknown promo with set code: '"+collectornumber+"' for "+name+"\n")
                 continue
-        elif setcode[0] == "P":
-            if not "Resale" in edition and not "WPN" in edition and not "FNM" in edition and not "Miscellaneous" in edition:
-                edition = edition.replace(" Promos","")
-            collectornumber = re.sub("[^0-9]","",collectornumber)
+
 
         # Process list of cards with different names, mostly lands
         #   Old sets have A/B/C versions
@@ -225,13 +226,13 @@ with open(infile, "r", encoding="utf-8") as file:
         #   alongside split cards.
         if "//" in name and setcode in {"DKA","SOI","XLN","BOT","NEO","AFC","VOW","MID","DBL","CLB", \
                                         "MOM","MOC","CMM","WOE","WOC","WHO","LCI","LCC","MKM","MKC", \
-                                        "CLU","OTC","MH3","M3C","BLC"}:
+                                        "CLU","OTC","MH3","M3C","BLC","CHK", "ISD"}:
             name = name.split("//")[0].strip()
         # Strip double quotes
         name = name.replace("\"","")
         # Unfinity fill-in-the-blanks are different sizes
-        if "_____" in name:
-            name = name.replace("_____","________")
+        if "_____ " in name:
+            name = name.replace("_____ ","________ ")
 
         # Check if card is explicitly overridden in names.csv
         if setcode in names.keys():
