@@ -1,3 +1,21 @@
+# No Longer Maintained
+CardSphere has finally implemented Scryfall ID as part of their import process so all the various treatments
+are now correctly identified. This should resolve nearly every issue I ran into that influenced me to create
+this script.
+
+From my individual usage, the only thing you need to do to import a Manabox export is to either change the
+"When missing condition" dropdown to "Set to Near Mint" (anything other than "Ignore Card") or do a search
+and replace to change the Manabox condition values to CardSphere condition values:
+
+    Manabox   ->   CardSphere
+    mint           Near Mint
+    near_mint      Near Mint
+    excellent      Near Mint/Slightly Played
+    good           Slightly Played
+    light_played   Slightly Played/Moderately Played
+    played         Moderately Played/Heavily Played
+    poor           Heavily Played
+
 # mb2cs.py
 Convert a Manabox csv export into one importable by Cardsphere.
 
